@@ -33,9 +33,6 @@ class FirstPage extends Component {
 
         {/*<WebView onLoad={() => this.hideSpinner()}
                  source={{ uri: "https://app.zeroswallet.com/" }} />*/}
-        <WebView onLoad={() => this.hideSpinner()}
-                 source={{ uri: "https://app.zeroswallet.com/" }} />
-
         {this.state.visible && (
           <Video
             // Can be a URL or a local file.
@@ -44,6 +41,11 @@ class FirstPage extends Component {
             style={styles.backgroundVideo}
           />
         )}
+
+        <View flex={1}  style={{marginTop:20,backgroundColor: '#D0E1F1',marginBottom:43}}>
+          <WebView onLoad={() => this.hideSpinner()}
+                   source={{ uri: "https://app.zeroswallet.com/" }} />
+        </View>
 
 
 
