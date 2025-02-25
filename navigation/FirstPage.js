@@ -8,8 +8,8 @@ import {
   Alert,
   TextInput,
   Linking,
-  StatusBar,StyleSheet,
-  ScrollView, ActivityIndicator,
+  StatusBar, StyleSheet,
+  ScrollView, ActivityIndicator, BackHandler
 } from "react-native";
 import WebView from "react-native-webview";
 import loadingVideo from "../images/loading.mp4"
@@ -21,33 +21,49 @@ class FirstPage extends Component {
     this.state = { visible: true };
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
   hideSpinner() {
     this.setState({ visible: false });
   }
-//https://stackoverflow.com/questions/45256826/react-native-webview-loading-indicatorhttps://stackoverflow.com/questions/45256826/react-native-webview-loading-indicator
+  handleBackButton = () => {
+    this.props.navigation.goBack(null);
+    return true;
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
 
   render() {
     return (
       <View flex={1} style={{marginTop:0,backgroundColor: '#D0E1F1',marginBottom:0}} >
         <StatusBar hidden = {false} backgroundColor="#D0E1F1" translucent = {true}/>
-
         {/*<WebView onLoad={() => this.hideSpinner()}
                  source={{ uri: "https://app.zeroswallet.com/" }} />*/}
-        {this.state.visible && (
+
+        <View flex={1}  style={{marginTop:40,backgroundColor: '#D0E1F1',marginBottom:43}}>
+          <WebView onLoad={() =>
+                   this.hideSpinner()}
+                   source={{ uri: "https://app.zeroswallet.com/" }}
+                   scalesPageToFit={false}
+                   scrollEnabled={false}
+                   setBuiltInZoomControls={false}
+                   javaScriptEnabled={true}
+                   />
+        </View>
+
+        {this.state.visible ==true?
           <Video
             // Can be a URL or a local file.
             source={loadingVideo}
             repeat={true}
             style={styles.backgroundVideo}
-          />
-        )}
-
-        <View flex={1}  style={{marginTop:20,backgroundColor: '#D0E1F1',marginBottom:43}}>
-          <WebView onLoad={() => this.hideSpinner()}
-                   source={{ uri: "https://app.zeroswallet.com/" }} />
-        </View>
-
-
+            onBack={() => this.state.visible}
+            fullscreen={false}
+          />:""
+        }
 
       </View>
     );
@@ -57,7 +73,8 @@ class FirstPage extends Component {
 var styles = StyleSheet.create({
   backgroundVideo: {
     height:"100%",
-    width:"100%"
+    width:"100%",
+    position: "relative",
   },
 });
 
