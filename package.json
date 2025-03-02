@@ -30,6 +30,7 @@
     "react-native-gesture-handler": "^2.14.1",
     "react-native-ionicons": "^4.6.5",
     "react-native-navigation-bar-color": "^2.0.2",
+    "react-native-onesignal": "^5.2.9",
     "react-native-pager-view": "^6.2.3",
     "react-native-qrcode": "^0.2.7",
     "react-native-qrcode-image": "^0.2.8",

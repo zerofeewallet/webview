@@ -12,7 +12,6 @@ import {
   ScrollView, ActivityIndicator, BackHandler
 } from "react-native";
 import WebView from "react-native-webview";
-import loadingVideo from "../images/loading.mp4"
 import Video from "react-native-video";
 
 class FirstPage extends Component {
@@ -22,7 +21,10 @@ class FirstPage extends Component {
   }
 
   componentDidMount() {
+
+
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+
   }
 
   hideSpinner() {
@@ -55,14 +57,14 @@ class FirstPage extends Component {
         </View>
 
         {this.state.visible ==true?
-          <Video
-            // Can be a URL or a local file.
-            source={loadingVideo}
-            repeat={true}
-            style={styles.backgroundVideo}
-            onBack={() => this.state.visible}
-            fullscreen={false}
-          />:""
+          <>
+            <Image style={{height:"100%",width:"100%",marginTop:-100}}
+                   source={require("../images/reload.png")} />
+            <View style={[styles.container, styles.horizontal]}>
+              <ActivityIndicator style={{marginTop:-350}} size="large" />
+            </View>
+          </>
+          :""
         }
 
       </View>
@@ -70,7 +72,20 @@ class FirstPage extends Component {
   }
 };
 
-var styles = StyleSheet.create({
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
+});
+
+var styless = StyleSheet.create({
   backgroundVideo: {
     height:"100%",
     width:"100%",

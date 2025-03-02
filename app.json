@@ -1,4 +1,18 @@
 {
   "name": "ZeroFeeWallet",
-  "displayName": "ZeroFeeWallet"
+  "displayName": "ZeroFeeWallet",
+
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "com.onesignal.example"
+  },
+  "plugins": [
+    [
+      "onesignal-expo-plugin",
+      {
+        "mode": "development"
+      }
+    ]
+  ]
+
 }
