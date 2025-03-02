@@ -17,7 +17,8 @@ import Video from "react-native-video";
 class FirstPage extends Component {
   constructor(props) {
     super(props);
-    this.state = { visible: true };
+    this.state = { visible: true,webViewRef:React.createRef()};
+    //this.webViewRef = React.createRef();
   }
 
   componentDidMount() {
@@ -31,8 +32,20 @@ class FirstPage extends Component {
     this.setState({ visible: false });
   }
   handleBackButton = () => {
-    this.props.navigation.goBack(null);
-    return true;
+    if (Platform.OS === "ios") return;
+
+    const handleBack = () => {
+      if (!this.state.webViewRef.current) return false;
+      this.state.webViewRef.current.goBack();
+      return true;
+    };
+
+    const handleEvent = BackHandler.addEventListener(
+      "hardwareBackPress",
+      handleBack
+    );
+    return () => handleEvent.remove();
+
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
@@ -46,13 +59,21 @@ class FirstPage extends Component {
                  source={{ uri: "https://app.zeroswallet.com/" }} />*/}
 
         <View flex={1}  style={{marginTop:40,backgroundColor: '#D0E1F1',marginBottom:43}}>
-          <WebView onLoad={() =>
-                   this.hideSpinner()}
+          <WebView
+                  startInLoadingState
+                   onLoad={() =>
+                         this.hideSpinner()
+                   }
                    source={{ uri: "https://app.zeroswallet.com/" }}
                    scalesPageToFit={false}
                    scrollEnabled={false}
+                  domStorageEnabled={true}
+                  originWhitelist={["https://*"]}
                    setBuiltInZoomControls={false}
                    javaScriptEnabled={true}
+                   allowsBackForwardNavigationGestures
+                   ref={this.state.webViewRef}
+                  //onPress={this.handleBackButton}
                    />
         </View>
 

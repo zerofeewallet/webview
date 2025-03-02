@@ -14,6 +14,7 @@ global.Buffer = require('buffer').Buffer;
 //gradlew clean
 //gradlew assembleRelease
 // aab realease npx react-native build-android --mode=release
+//npx react-native build-android --mode=release
 //https://github.com/facebook/react-native/issues/28510
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 import "./ignoreWarnings"
@@ -22,7 +23,6 @@ LogBox.ignoreAllLogs();
 //26 dec 2024 start date
 
 import FirstPage from "./navigation/FirstPage";
-
 
 const Stack = createNativeStackNavigator()
 const auth = 1
