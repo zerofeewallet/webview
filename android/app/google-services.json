@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "367681765951",
+    "project_id": "zeros-32585",
+    "storage_bucket": "zeros-32585.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367681765951:android:c44b34ccd28ab0855a2e8a",
+        "android_client_info": {
+          "package_name": "com.zerofeewallet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUJgE4wBDEji9WcmGR8eP3IK2pvm6du4Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

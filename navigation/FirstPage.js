@@ -9,7 +9,7 @@ import {
   TextInput,
   Linking,
   StatusBar, StyleSheet,
-  ScrollView, ActivityIndicator, BackHandler
+  ScrollView, ActivityIndicator, BackHandler, ToastAndroid,
 } from "react-native";
 import WebView from "react-native-webview";
 import Video from "react-native-video";
@@ -22,16 +22,14 @@ class FirstPage extends Component {
   }
 
   componentDidMount() {
-
-
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
-
   }
 
   hideSpinner() {
     this.setState({ visible: false });
   }
   handleBackButton = () => {
+    //console.log(this.state.webViewRef.current,"Ref")
     if (Platform.OS === "ios") return;
 
     const handleBack = () => {
@@ -39,13 +37,11 @@ class FirstPage extends Component {
       this.state.webViewRef.current.goBack();
       return true;
     };
-
     const handleEvent = BackHandler.addEventListener(
       "hardwareBackPress",
       handleBack
     );
     return () => handleEvent.remove();
-
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
@@ -73,7 +69,8 @@ class FirstPage extends Component {
                    javaScriptEnabled={true}
                    allowsBackForwardNavigationGestures
                    ref={this.state.webViewRef}
-                  //onPress={this.handleBackButton}
+                   onPress={this.handleBackButton}
+                   cacheEnabled={true}
                    />
         </View>
 
